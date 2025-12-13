@@ -70,9 +70,43 @@
 
 <h2>Verify Your Certificate</h2>
 
-<input id="refno" placeholder="Enter Certificate Ref. No.">
-<button onclick="verify()">Verify</button>
+<div class="center-box">
+  <input id="refno" placeholder="Enter Certificate Ref. No." class="big-input">
+  <button onclick="verify()" class="big-button">Verify</button>
+</div>
 
+<style>
+  .center-box {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .big-input {
+    padding: 15px;
+    width: 350px;
+    font-size: 20px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    margin: 10px;
+  }
+
+  .big-button {
+    padding: 15px 30px;
+    font-size: 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+  }
+
+  .big-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+
+  
 <div id="result"></div>
 
 <script>
