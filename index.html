@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ID Verification</title>
+  <title>Certificate Verification</title>
   <style>
     body { font-family: Arial; text-align: center; margin-top: 50px; }
-    input { padding: 10px; width: 250px; font-size: 18px; }
+    input { padding: 10px; width: 280px; font-size: 18px; }
     button { padding: 10px 20px; font-size: 18px; }
     #result { margin-top: 20px; font-size: 20px; }
   </style>
 </head>
 <body>
 
-<h2>Verify Your Certificate Ref. No.</h2>
+<h2>Verify Certificate</h2>
 
-<input id="uid" placeholder="Enter Ref. No.">
+<input id="refno" placeholder="Enter Certificate Ref. No.">
 <button onclick="verify()">Verify</button>
 
 <div id="result"></div>
 
 <script>
 async function verify() {
-  const uid = document.getElementById("uid").value.trim();
+  const refNo = document.getElementById("refno").value.trim();
   const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOePOU_a0oqTUUFA3gjpWcRi2xTUK803tUMF7Kn63_TNlAe-9_LgmUC5wkkGnlf1fNS8ICgB-cfIsj/pub?output=csv"; // <-- Paste Google Sheet CSV link
 
   const response = await fetch(csvUrl);
@@ -31,7 +31,7 @@ async function verify() {
   let found = false;
 
   for (let i = 1; i < rows.length; i++) {
-    if (rows[i][0] === uid) {
+    if (rows[i][0] === refNo) {
       found = true;
       document.getElementById("result").innerHTML =
         `<b>Name:</b> ${rows[i][1]}<br>
@@ -44,7 +44,7 @@ async function verify() {
 
   if (!found) {
     document.getElementById("result").innerHTML =
-      <span style="color:red;">ID Not Found</span>;
+      `<span style="color:red;">Certificate Ref. No. not found</span>`;
   }
 }
 </script>
