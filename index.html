@@ -3,52 +3,17 @@
 <head>
   <title>Verify Your Certificate Ref. No.</title>
   <style>
-    body { 
-      font-family: Arial; 
-      text-align: center; 
-      margin-top: 50px; 
-    }
-
-    .logo-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 700px;
-      margin: 0 auto 20px;
-    }
-
-    .logo-container img {
-      height: 80px;
-    }
-
-    input { 
-      padding: 10px; 
-      width: 280px; 
-      font-size: 18px; 
-    }
-
-    button { 
-      padding: 10px 20px; 
-      font-size: 18px; 
-      cursor: pointer;
-    }
-
-    #result { 
-      margin-top: 20px; 
-      font-size: 20px; 
-    }
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    input { padding: 10px; width: 280px; font-size: 18px; }
+    button { padding: 10px 20px; font-size: 18px; }
+    #result { margin-top: 20px; font-size: 20px; }
   </style>
 </head>
 <body>
 
-<div class="logo-container">
-  <img src="https://drive.google.com/file/d/1jlGUqU9GnZBjD-NP83MN_saxBfqbAg5d/view?usp=drive_link" alt="Left Logo">
-</div>
-
 <h2>Verify Your Certificate Ref. No.</h2>
 
 <input id="refno" placeholder="Enter Certificate Ref. No.">
-<br><br>
 <button onclick="verify()">Verify</button>
 
 <div id="result"></div>
@@ -56,12 +21,13 @@
 <script>
 async function verify() {
   const refNo = document.getElementById("refno").value.trim();
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOePOU_a0oqTUUFA3gjpWcRi2xTUK803tUMF7Kn63_TNlAe-9_LgmUC5wkkGnlf1fNS8ICgB-cfIsj/pub?output=csv"; // <-- Paste Google Sheet CSV link 
+  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQOePOU_a0oqTUUFA3gjpWcRi2xTUK803tUMF7Kn63_TNlAe-9_LgmUC5wkkGnlf1fNS8ICgB-cfIsj/pub?output=csv"; // <-- Paste Google Sheet CSV link
 
   const response = await fetch(csvUrl);
   const text = await response.text();
 
   const rows = text.split("\n").map(r => r.split(","));
+
   let found = false;
 
   for (let i = 1; i < rows.length; i++) {
