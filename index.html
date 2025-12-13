@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ID Verification</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    input { padding: 10px; width: 250px; font-size: 18px; }
+    button { padding: 10px 20px; font-size: 18px; }
+    #result { margin-top: 20px; font-size: 20px; }
+  </style>
+</head>
+<body>
+
+<h2>Verify Your Certificate Ref. No.</h2>
+
+<input id="uid" placeholder="Enter Ref. No.">
+<button onclick="verify()">Verify</button>
+
+<div id="result"></div>
+
+<script>
+async function verify() {
+  const uid = document.getElementById("uid").value.trim();
+  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8JMlv6ZBBltZPAU6D_I2mRbBpz04SeJLs1mGQM7yOIZz_w1wH4pCGEEOm2KjQoILlSkOvR2l2oU67/pub?output=csv"; // <-- Paste Google Sheet CSV link
+
+  const response = await fetch(csvUrl);
+  const text = await response.text();
+
+  const rows = text.split("\n").map(r => r.split(","));
+
+  let found = false;
+
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][0] === uid) {
+      found = true;
+      document.getElementById("result").innerHTML =
+        `<b>Name:</b> ${rows[i][1]}<br>
+         <b>Topic:</b> ${rows[i][2]}<br>
+         <b>Issue:</b> ${rows[i][3]}<br>
+         <b>Year:</b> ${rows[i][4]}`;
+      break;
+    }
+  }
+
+  if (!found) {
+    document.getElementById("result").innerHTML =
+      <span style="color:red;">ID Not Found</span>;
+  }
+}
+</script>
+
+</body>
+</html>
