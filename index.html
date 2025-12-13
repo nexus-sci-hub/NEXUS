@@ -21,7 +21,7 @@
 <script>
 async function verify() {
   const uid = document.getElementById("uid").value.trim();
-  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8JMlv6ZBBltZPAU6D_I2mRbBpz04SeJLs1mGQM7yOIZz_w1wH4pCGEEOm2KjQoILlSkOvR2l2oU67/pub?output=csv"; // <-- Paste Google Sheet CSV link
+  const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8JMlv6ZBBltZPAU6D_I2mRbBpz04SeJLs1mGQM7yOIZz_w1wH4pCGEEOm2KjQoILlSkOvR2l2oU67/pub?gid=0&single=true&output=csv"; // <-- Paste Google Sheet CSV link
 
   const response = await fetch(csvUrl);
   const text = await response.text();
